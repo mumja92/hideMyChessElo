@@ -1,0 +1,22 @@
+{
+
+  "manifest_version": 2,
+  "name": "mumjolandia",
+  "version": "1.0",
+
+  "description": "lol",
+
+  "icons": {
+    "48": "icons/pepog-48.png",
+    "96": "icons/pepog-96.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.chess.com/*"],
+      "js": ["hide_elo.js"]
+    }
+  ]
+
+}
+
