@@ -7,13 +7,16 @@ function clearEloFromElementArray(elementArray){
     }
 }
 
-function hideEloNextToNicknames(){
+function hideEloNextToNicknames(infinite = false){
     var elementArray = document.getElementsByClassName("user-tagline-popover-rating");
     if (elementArray.length > 0){
         clearEloFromElementArray(elementArray);
+        if (infinite){
+            setTimeout(function(){hideEloNextToNicknames(infinite)}, refreshInterval);
+        }
     }
     else{
-        setTimeout(hideEloNextToNicknames, refreshInterval);
+        setTimeout(function(){hideEloNextToNicknames(infinite)}, refreshInterval);
     }
 }
 
@@ -57,7 +60,7 @@ function run(){
     }
 
     if (document.URL.includes("chess.com/member")){
-        hideEloNextToNicknames();
+        hideEloNextToNicknames(true);
         hideHighestElo();
         return
     }
