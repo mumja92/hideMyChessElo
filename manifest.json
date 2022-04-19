@@ -1,10 +1,10 @@
 {
 
   "manifest_version": 2,
-  "name": "mumjolandia",
-  "version": "1.0",
+  "name": "HideMyElo",
+  "version": "0.1",
 
-  "description": "lol",
+  "description": "Hides elo for chess.com",
 
   "icons": {
     "48": "icons/pepog-48.png",
