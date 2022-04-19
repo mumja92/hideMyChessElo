@@ -1,7 +1,3 @@
-function sleep(ms){
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 function hideEloNextToNicknames(){
     var userTaglinePopoverRatingArray = document.getElementsByClassName("user-tagline-popover-rating");
     for (var i=0; i<userTaglinePopoverRatingArray.length; i++){
@@ -17,7 +13,32 @@ function hideHighestElo(){
     }
 }
 
-setTimeout(() => {
-    hideEloNextToNicknames();
-    hideHighestElo();
-}, 1000);
+function run(){
+    if (document.URL.includes("chess.com/home")){
+        if (document.getElementsByClassName("user-tagline-popover-rating").length > 1){
+            hideEloNextToNicknames();
+            hideHighestElo();
+        }
+        else{
+            setTimeout(() => {
+                run();
+            }, 100);
+        }
+        return
+    }
+
+    if (document.URL.includes("chess.com/member")){
+        if (document.getElementsByClassName("user-tagline-popover-rating").length > 1){
+            hideEloNextToNicknames();
+            hideHighestElo();
+        }
+        else{
+            setTimeout(() => {
+                run();
+            }, 100);
+        }
+        return
+    }
+}
+
+run();
