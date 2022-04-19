@@ -1,61 +1,70 @@
 const eloReplacerString = "(?)"
+const refreshInterval = 50
 
-function hideEloNextToNicknames(){
-    var userTaglinePopoverRatingArray = document.getElementsByClassName("user-tagline-popover-rating");
-    for (var i=0; i<userTaglinePopoverRatingArray.length; i++){
-        userTaglinePopoverRatingArray[i].innerHTML=eloReplacerString;
-    }
-}
-
-function hideEloNextToNicknamesInGame(){
-    var elementArray = document.getElementsByClassName("user-tagline-rating");
+function clearEloFromElementArray(elementArray){
     for (var i=0; i<elementArray.length; i++){
         elementArray[i].innerHTML=eloReplacerString;
     }
 }
 
+function hideEloNextToNicknames(){
+    var elementArray = document.getElementsByClassName("user-tagline-popover-rating");
+    if (elementArray.length > 0){
+        clearEloFromElementArray(elementArray);
+    }
+    else{
+        setTimeout(hideEloNextToNicknames, refreshInterval);
+    }
+}
+
+function hideEloNextToNicknamesInGame(){
+    var elementArray = document.getElementsByClassName("user-tagline-rating");
+    // it is not initialized when length == 1
+    if (elementArray.length > 1){
+        clearEloFromElementArray(elementArray);
+    }
+    else{
+        setTimeout(hideEloNextToNicknamesInGame, refreshInterval);
+    }
+}
+
 function hideHighestElo(){
-    var statTextDataHighestArray = document.getElementsByClassName("stat-text-data-highest");
-    for (var i=0; i<statTextDataHighestArray.length; i++){
-        statTextDataHighestArray[i].innerHTML=eloReplacerString;
+    var elementArray = document.getElementsByClassName("stat-text-data-highest");
+    if (elementArray.length > 0){
+        clearEloFromElementArray(elementArray);
+    }
+    else{
+        setTimeout(hideHighestElo, refreshInterval);
     }
 }
 
 function hideAfterGameElo(){
-    document.getElementsByClassName("game-over-rating-component")[0].remove();
+    var elementArray = document.getElementsByClassName("game-over-rating-component");
+    if (elementArray.length > 0){
+        elementArray[0].remove();
+    }
+    else{
+        setTimeout(hideAfterGameElo, refreshInterval);
+    }
+
 }
 
 function run(){
     if (document.URL.includes("chess.com/home")){
-        if (document.getElementsByClassName("user-tagline-popover-rating").length > 0){
-            hideEloNextToNicknames();
-            hideHighestElo();
-        }
-        else{
-            setTimeout(run, 100);
-        }
+        hideEloNextToNicknames();
+        hideHighestElo();
         return
     }
 
     if (document.URL.includes("chess.com/member")){
-        if (document.getElementsByClassName("user-tagline-popover-rating").length > 0){
-            hideEloNextToNicknames();
-            hideHighestElo();
-        }
-        else{
-            setTimeout(run, 100);
-        }
+        hideEloNextToNicknames();
+        hideHighestElo();
         return
     }
 
     if (document.URL.includes("chess.com/game/live")){
-        if (document.getElementsByClassName("game-over-rating-component").length > 0){
-            hideAfterGameElo();
-            hideEloNextToNicknamesInGame();
-        }
-        else{
-            setTimeout(run, 100);
-        }
+        hideEloNextToNicknamesInGame();
+        hideAfterGameElo();
         return
     }
 }
