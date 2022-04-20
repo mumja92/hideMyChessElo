@@ -16,38 +16,43 @@ function hideEloByClassTag(tag, invalidCount=0, infinite=false){
     }
 }
 
-function hideAfterGameElo(){
-    var elementArray = document.getElementsByClassName("game-over-rating-component");
+function removeElementByClassTag(tag, infinite=false){
+    var elementArray = document.getElementsByClassName(tag);
     if (elementArray.length > 0){
-        elementArray[0].remove();
+        while (elementArray.length > 0){
+            elementArray[0].remove();
+        }
+        if (infinite){
+            setTimeout(function(){removeElementByClassTag(tag, infinite)}, refreshInterval);
+        }
     }
     else{
-        setTimeout(hideAfterGameElo, refreshInterval);
+        setTimeout(function(){removeElementByClassTag(tag, infinite)}, refreshInterval);
     }
 }
 
-function run(){
-    if (document.URL.includes("chess.com/home")){
-        hideEloByClassTag("user-tagline-popover-rating");
-        hideEloByClassTag("stat-text-data-highest");
-        return
-    }
-
-    if (document.URL.includes("chess.com/member")){
-        hideEloByClassTag("user-tagline-popover-rating", invalidCount=0, infinite=true);
-        hideEloByClassTag("stat-text-data-highest");
-        return
-    }
-
-    if (document.URL.includes("chess.com/game/live")){
-        hideEloByClassTag("user-tagline-rating", invalidCount=1);
-        hideAfterGameElo();
-        return
-    }
-    if (document.URL.includes("chess.com/games/archive")){
-        hideEloByClassTag("user-tagline-rating");
-        return
-    }
+function hideEloMain()
+{
+    hideEloByClassTag("user-tagline-popover-rating", invalidCount=0, infinite=true);
+    hideEloByClassTag("stat-text-data-highest", invalidCount=0, infinite=true);
+    hideEloByClassTag("stat-section-user-rating", invalidCount=0, infinite=true);
+    hideEloByClassTag("stat-text-data-wld-item", invalidCount=0, infinite=true);
+    removeElementByClassTag("stat-section-chart", infinite=true);
 }
 
-run();
+if (document.URL.includes("chess.com/home")){
+    hideEloMain();
+}
+
+if (document.URL.includes("chess.com/member")){
+    hideEloMain();
+}
+
+if (document.URL.includes("chess.com/game/live")){
+    hideEloByClassTag("user-tagline-rating", invalidCount=1);
+    removeElementByClassTag("game-over-rating-component");
+}
+
+if (document.URL.includes("chess.com/games/archive")){
+    hideEloByClassTag("user-tagline-rating");
+}
