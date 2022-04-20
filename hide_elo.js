@@ -1,18 +1,18 @@
 const eloReplacerString = "(?)"
 const refreshInterval = 50
 
-function hideEloByClassTag(tag, invalidCount=0, infinite=false){
+function hideEloByClassTag(tag, infinite=false, minValue=0){
     var elementArray = document.getElementsByClassName(tag);
-    if (elementArray.length > invalidCount){
+    if (elementArray.length > minValue){
         for (var i=0; i<elementArray.length; i++){
             elementArray[i].innerHTML=eloReplacerString;
         }
         if (infinite){
-            setTimeout(function(){hideEloByClassTag(tag, invalidCount, infinite)}, refreshInterval);
+            setTimeout(function(){hideEloByClassTag(tag, infinite, minValue)}, refreshInterval);
         }
     }
     else{
-        setTimeout(function(){hideEloByClassTag(tag, invalidCount, infinite)}, refreshInterval);
+        setTimeout(function(){hideEloByClassTag(tag, infinite, minValue)}, refreshInterval);
     }
 }
 
@@ -33,10 +33,10 @@ function removeElementByClassTag(tag, infinite=false){
 
 function hideEloMain()
 {
-    hideEloByClassTag("user-tagline-popover-rating", invalidCount=0, infinite=true);
-    hideEloByClassTag("stat-text-data-highest", invalidCount=0, infinite=true);
-    hideEloByClassTag("stat-section-user-rating", invalidCount=0, infinite=true);
-    hideEloByClassTag("stat-text-data-wld-item", invalidCount=0, infinite=true);
+    hideEloByClassTag("user-tagline-popover-rating", infinite=true);
+    hideEloByClassTag("stat-text-data-highest", infinite=true);
+    hideEloByClassTag("stat-section-user-rating", infinite=true);
+    hideEloByClassTag("stat-text-data-wld-item", infinite=true);
     removeElementByClassTag("stat-section-chart", infinite=true);
 }
 
@@ -49,7 +49,7 @@ if (document.URL.includes("chess.com/member")){
 }
 
 if (document.URL.includes("chess.com/game/live")){
-    hideEloByClassTag("user-tagline-rating", invalidCount=1);
+    hideEloByClassTag("user-tagline-rating", infinite=false, minValue=1);
     removeElementByClassTag("game-over-rating-component");
 }
 
