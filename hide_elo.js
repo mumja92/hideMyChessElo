@@ -1,5 +1,19 @@
-const eloReplacerString = "(?)"
-const refreshInterval = 50
+var eloReplacerString = "(?)"
+var refreshInterval = 50
+
+function onError(error) {
+    console.log(`Error: ${error}`);
+}
+
+function onGot(item) {
+    if (item.replacer) {
+        eloReplacerString = item.replacer;
+    }
+}
+
+let getting = browser.storage.sync.get("replacer");
+getting.then(onGot, onError);
+
 
 function hideEloByClassTag(tag, infinite=false, minValue=0){
     var elementArray = document.getElementsByClassName(tag);

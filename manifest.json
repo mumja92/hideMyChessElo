@@ -16,7 +16,19 @@
       "matches": ["*://*.chess.com/*"],
       "js": ["hide_elo.js"]
     }
-  ]
+  ],
+
+  "options_ui": {
+      "page": "options.html"
+  },
+
+  "permissions": ["storage"],
+
+  "browser_specific_settings": {
+      "gecko": {
+          "id": "hide@elo.com"
+      }
+  }
 
 }
 
