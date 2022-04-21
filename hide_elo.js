@@ -45,6 +45,21 @@ function removeElementByClassTag(tag, infinite=false){
     }
 }
 
+function removeClassFromElementsByTag(tag, infinite=false){
+    var elementArray = document.getElementsByClassName(tag);
+    if (elementArray.length > 0){
+        for (var i=0; i<elementArray.length; i++){
+            elementArray[i].classList.remove(tag);
+        }
+        if (infinite){
+            setTimeout(function(){removeClassFromElementsByTag(tag, infinite)}, refreshInterval);
+        }
+    }
+    else{
+        setTimeout(function(){removeClassFromElementsByTag(tag, infinite)}, refreshInterval);
+    }
+}
+
 function hideEloMain()
 {
     hideEloByClassTag("stat-text-data-lowest", infinite=true);
@@ -88,5 +103,7 @@ if (document.URL.includes("chess.com/stats")){
     hideEloByClassTag("footer-block-title", infinite=true);
     hideEloByClassTag("footer-block-red", infinite=true);
     hideEloByClassTag("footer-block-green", infinite=true);
+    removeClassFromElementsByTag("footer-block-green", infinite=true);
+    removeClassFromElementsByTag("footer-block-red", infinite=true);
 }
 
