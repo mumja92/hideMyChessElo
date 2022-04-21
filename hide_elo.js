@@ -47,10 +47,12 @@ function removeElementByClassTag(tag, infinite=false){
 
 function hideEloMain()
 {
-    hideEloByClassTag("user-tagline-popover-rating", infinite=true);
+    hideEloByClassTag("stat-text-data-lowest", infinite=true);
     hideEloByClassTag("stat-text-data-highest", infinite=true);
-    hideEloByClassTag("stat-section-user-rating", infinite=true);
     hideEloByClassTag("stat-text-data-wld-item", infinite=true);
+    hideEloByClassTag("stat-section-user-rating", infinite=true);
+    hideEloByClassTag("user-tagline-popover-rating", infinite=true);
+    hideEloByClassTag("stat-text-data-rating-change", infinite=true);
     removeElementByClassTag("stat-section-chart", infinite=true);
 }
 
