@@ -80,3 +80,13 @@ if (document.URL.includes("chess.com/play")){
 if (document.URL.includes("chess.com/games/archive")){
     hideEloByClassTag("user-tagline-rating");
 }
+
+if (document.URL.includes("chess.com/stats")){
+    removeElementByClassTag("game-parent", infinite=true);
+    hideEloByClassTag("user-tagline-popover-rating", infinite=true);
+    hideEloByClassTag("sidebar-nav-value", infinite=true);
+    hideEloByClassTag("footer-block-title", infinite=true);
+    hideEloByClassTag("footer-block-red", infinite=true);
+    hideEloByClassTag("footer-block-green", infinite=true);
+}
+
