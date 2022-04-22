@@ -9,10 +9,13 @@ function onGot(item) {
     if (item.replacer) {
         eloReplacerString = item.replacer;
     }
+    if (item.refresh) {
+        refreshInterval = parseInt(item.refresh) || 50;
+    }
 }
 
-let getting = browser.storage.sync.get("replacer");
-getting.then(onGot, onError);
+browser.storage.sync.get("replacer").then(onGot, onError);
+browser.storage.sync.get("refresh").then(onGot, onError);
 
 
 function hideEloByClassTag(tag, infinite=false, minValue=0){
