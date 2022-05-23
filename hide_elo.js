@@ -71,6 +71,7 @@ function hideEloMain()
     hideEloByClassTag("stat-section-user-rating", infinite=true);
     hideEloByClassTag("user-tagline-popover-rating", infinite=true);
     hideEloByClassTag("stat-text-data-rating-change", infinite=true);
+    hideEloByClassTag("user-rating-rating", infinite=true);
     removeElementByClassTag("stat-section-chart", infinite=true);
 }
 
@@ -108,5 +109,23 @@ if (document.URL.includes("chess.com/stats")){
     hideEloByClassTag("footer-block-green", infinite=true);
     removeClassFromElementsByTag("footer-block-green", infinite=true);
     removeClassFromElementsByTag("footer-block-red", infinite=true);
+    hideEloByClassTag("user-tagline-rating");
+}
+
+if (document.URL.includes("chess.com/analysis")){
+    hideEloByClassTag("user-tagline-rating");
+}
+
+if (document.URL.includes("chess.com/friends")){
+    removeElementByClassTag("friends-list-user-rating");
+    hideEloByClassTag("top-user-score");
+}
+
+if (document.URL.includes("chess.com/leaderboard")){
+    removeElementByClassTag("leaderboard-row-score");
+    removeElementByClassTag("leaderboard-row-stats");
+    hideEloByClassTag("leaderboard-stats-rating");
+    removeElementByClassTag("leaderboard-stats-chart");
+    removeElementByClassTag("leaderboard-stats-stats");
 }
 

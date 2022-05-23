@@ -10,7 +10,7 @@ function restoreOptions() {
 
   function setCurrentChoice(result) {
     document.querySelector("#replacer").value = result.replacer || "(?)";
-    document.querySelector("#refresh").value = result.refresh || "50";
+    document.querySelector("#refresh").value = result.refresh || "20";
   }
 
   function onError(error) {
