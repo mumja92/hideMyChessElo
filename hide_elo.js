@@ -84,11 +84,15 @@ if (document.URL.includes("chess.com/member")){
 }
 
 if (document.URL.includes("chess.com/game")){
-    hideEloByClassTag("user-tagline-rating", infinite=false, minValue=1);
+    hideEloByClassTag("user-tagline-rating", infinite=true);
     removeElementByClassTag("game-over-rating-component");
     // user-rating is showed in chat
     // page changes from .com/play to .com/game when you reload page during game
     hideEloByClassTag("user-rating", infinite=false);
+    removeElementByClassTag("chat-room-component", infinite=true);
+    //after game:
+    removeElementByClassTag("game-over-rating-component", infinite=true);
+
 }
 
 if (document.URL.includes("chess.com/play")){
